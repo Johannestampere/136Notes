@@ -4,4 +4,7 @@ That's why I made a note-taking app for 136 students to take notes while having 
 
 Tech stack: Next.js, React.js, MongoDB, Tailwind CSS, Flask. 
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/Johannestampere/136Notes/blob/main/app/demo/1.png?raw=true)
+![alt text](https://github.com/Johannestampere/136Notes/blob/main/app/demo/2.png?raw=true)
+![alt text](https://github.com/Johannestampere/136Notes/blob/main/app/demo/3.png?raw=true)
+![alt text](https://github.com/Johannestampere/136Notes/blob/main/app/demo/4.png?raw=true)
