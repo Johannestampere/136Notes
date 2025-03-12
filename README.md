@@ -1,6 +1,9 @@
-In my first linear algebra course at Waterloo (MATH 136), a problem I often encountered in lectures was not understanding the content geometrically. The textbook was of little to no help, containing only a couple of 2D/3D graphs, which were hard to understand since they were on paper. 
+Struggling to grasp the geometric intuition behind linear algebra concepts in Waterloo's MATH 136? Traditional textbooks often fall short with limited 2D/3D diagrams that are hard to interpret on paper. That's why I built this note-taking app specifically designed for MATH 136 students.
 
-That's why I decided to made a note-taking app for 136 students to take notes while having the ability to understand what you're actually learning from interactive 2D and 3D graphs. The app also supports LaTeX equations. 
+*Key features:*
+- Interactive 2D/3D Graphs
+- Full LaTeX Support
+- Custom note-taking
 
 Tech stack: Next.js, React.js, MongoDB, Tailwind CSS, Flask. 
 
