@@ -1,4 +1,4 @@
-Struggling to grasp the geometric intuition behind linear algebra concepts? Traditional textbooks often fall short with limited 2D/3D diagrams that are hard to interpret on paper. That's why I built a note-taking app specifically designed for linear algebra students that delivers intuitive visualization using interactive models. 
+Struggling to grasp the geometric intuition behind linear algebra concepts? Traditional textbooks often fall short with limited 2D/3D diagrams that are hard to interpret on paper. That's why I built a note-taking app specifically designed for linear algebra students that delivers intuitive visualization using interactive 2D/3D models and supports LaTeX. 
 
 **Key features:**
 - 2D graphs - _Matplotlib_
