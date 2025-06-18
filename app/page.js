@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { useSession, signIn } from "next-auth/react"
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 import "@/app/globals.css" 
 import Image from 'next/image'
 import latexlogo from "@/public/LaTeX_logo.svg.png"
@@ -10,18 +10,11 @@ import mathjaxlogo from "@/public/mathjax.png"
 
 const HomePage = () => {
   const router = useRouter()
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
-  useEffect(() => {
-    if (!session) {
-      return
-    }
-    if (session) {
-      handleSignIn()
-    }
-  }, [session, router])
+  const handleSignIn = useCallback(async () => {
+    if (!session?.user) return
 
-  const handleSignIn = async () => {
     try {
       const response = await fetch("/api/new-user", {
         method: "POST",
@@ -39,14 +32,27 @@ const HomePage = () => {
         const data = await response.json();
         router.push("/dashboard");
       } else {
-        console.error('Failed to create/fetch user');
+        throw new Error('Failed to create/fetch user');
       }
     } catch (e) {
       console.error(e);
     }
+  }, [session, router]);
+
+  useEffect(() => {
+    if (session?.user) {
+      handleSignIn();
+    }
+  }, [session, handleSignIn]);
+  
+  if (status === "loading") {
+    return (
+      <div className="flex min-h-screen bg-emerald-900 text-white items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-400"></div>
+      </div>
+    );
   }
-  
-  
+
   if (session) {
     return null
   }
