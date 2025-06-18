@@ -30,7 +30,7 @@ export default function Navbar({ refreshFiles }) {
                 }),
             });
 
-            // If the file was created successfully, refresh the file list and the input field
+
             if (response.ok) {
                 const data = await response.json();
                 setFileName("");
@@ -74,10 +74,6 @@ export default function Navbar({ refreshFiles }) {
             </div>
 
             <div className="w-full mt-auto">
-                <div className="text-white text-lg p-2 rounded-2xl hover:bg-neutral-800 transition-colors cursor-pointer text-center mb-4">
-                    Recents
-                </div>
-
                 {session && (
                     <button 
                         onClick={handleSignOut} 

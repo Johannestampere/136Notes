@@ -85,8 +85,11 @@ const Sum3D = ({ vectors }) => {
                 scene.add(arrowHelper);
             };
 
-            const v1 = new THREE.Vector3(...vectors[0]);
-            const v2 = new THREE.Vector3(...vectors[1]);
+
+            const v1Arr = Array.isArray(vectors[0]) ? vectors[0] : [0, 0, 0];
+            const v2Arr = Array.isArray(vectors[1]) ? vectors[1] : [0, 0, 0];
+            const v1 = new THREE.Vector3(...v1Arr);
+            const v2 = new THREE.Vector3(...v2Arr);
             const vSum = new THREE.Vector3().addVectors(v1, v2);
 
             // colors

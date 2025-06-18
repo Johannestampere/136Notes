@@ -65,7 +65,7 @@ const HomePage = () => {
             136Notes
           </h1>
           <p className="mt-2 text-lg sm:text-xl text-neutral-300">
-            Dynamic Linear Algebra Note-Taking App for Visual Learners
+            Linear Algebra Note-Taking App for Visual Learners
           </p>
           <div className="mt-8">
             <button

@@ -7,6 +7,8 @@ import VectorSum from "@/app/components/2d/VectorSum2D";
 import Projection2D from "@/app/components/2d/Projection2D";
 import Vector3D from "@/app/components/3d/Vector3D";
 import Sum3D from "./3d/Sum3d";
+import VectorInput from "@/app/components/VectorInput";
+import { FaRegEdit } from "react-icons/fa";
 
 export default function Cell({ cell, isEditing, setEditingCellId, refreshFileData, selectedCellId, setSelectedCellId }) {
     const [content, setContent] = useState(cell.data || "")
@@ -147,18 +149,59 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
         }
     }, [objectType3D, cell._id])
 
+    useEffect(() => {
+        if (cell.type === "3d" && objectType3D === "vectors_sum") {
+            let parsed;
+            try {
+                parsed = content ? JSON.parse(content) : undefined;
+            } catch {
+                parsed = undefined;
+            }
+            const is3D = Array.isArray(parsed) && parsed.length === 2 &&
+                Array.isArray(parsed[0]) && parsed[0].length === 3 &&
+                Array.isArray(parsed[1]) && parsed[1].length === 3;
+            if (!is3D) {
+                setContent(JSON.stringify([[0,0,0],[0,0,0]]));
+            }
+        }
+    }, [objectType3D, cell.type]);
+
     return (
-        <div className={`mb-4 transition-all ${selectedCellId === cell._id ? "bg-neutral-900 border border-neutral-700 shadow-2xl scale-[1.01]" : "bg-black border border-neutral-800 shadow-lg"} rounded-2xl p-4`} onClick={() => setSelectedCellId(cell._id)}>
+        <div className={`mb-4 transition-all ${selectedCellId === cell._id ? "bg-neutral-900 border border-neutral-700 shadow-2xl scale-[1.01]" : "bg-black border border-neutral-800 shadow-lg"} rounded-2xl p-4 relative`} onClick={e => { e.stopPropagation(); setSelectedCellId(cell._id); }}>
+            {!isEditing && (
+                <button
+                    className="absolute top-2 right-2 text-neutral-400 hover:text-white p-2 rounded-full transition-colors z-10 bg-black/40"
+                    onClick={e => { e.stopPropagation(); setEditingCellId(cell._id); }}
+                    title="Edit cell"
+                >
+                    <FaRegEdit size={20} />
+                </button>
+            )}
             {isEditing ? (
                 <div className="flex items-center space-x-2">
-                    <textarea
-                        ref={textareaRef}
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        className="p-3 bg-neutral-800 text-white rounded-2xl flex-grow text-base resize-none overflow-hidden border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white transition"
-                        placeholder={`Enter ${cell.type}...`}
-                        rows={1}
-                    />
+                    {/* Vector/Vector Sum/Projection2D input for 2d cells */}
+                    {cell.type === "2d" && (objectType === "vector" || objectType === "vectors_sum" || objectType === "projection2d") ? (
+                        <VectorInput
+                            type={objectType}
+                            value={content ? JSON.parse(content) : (objectType === "vector" ? [0,0] : [[0,0],[0,0]])}
+                            onChange={val => setContent(JSON.stringify(val))}
+                        />
+                    ) : cell.type === "3d" && (objectType3D === "vector" || objectType3D === "vectors_sum") ? (
+                        <VectorInput
+                            type={objectType3D}
+                            value={content ? JSON.parse(content) : (objectType3D === "vector" ? [0,0,0] : [[0,0,0],[0,0,0]])}
+                            onChange={val => setContent(JSON.stringify(val))}
+                        />
+                    ) : (
+                        <textarea
+                            ref={textareaRef}
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            className="p-3 bg-neutral-800 text-white rounded-2xl flex-grow text-base resize-none overflow-hidden border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            placeholder={`Enter ${cell.type}...`}
+                            rows={1}
+                        />
+                    )}
                     {cell.type === "2d" && (
                         <select
                             value={objectType}
@@ -203,7 +246,6 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
                         cell.type === "h2" ? "text-2xl font-semibold" :
                         "text-base"
                     } text-white`}
-                    onDoubleClick={() => setEditingCellId(cell._id)}
                 >
                     {cell.type === "latex" ? (
                         <MathJaxContext version={3} config={config}>

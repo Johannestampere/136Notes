@@ -50,6 +50,21 @@ export default function FilePage() {
         };
     }, []);
 
+    useEffect(() => {
+        if (!file) return;
+        // Handler to detect clicks outside the notebook area
+        const handleClick = (e) => {
+            // If the click is inside the notebook container, do nothing
+            if (e.target.closest('.notebook-container')) return;
+            setEditingCellId(null);
+            setSelectedCellId(null);
+        };
+        document.addEventListener('mousedown', handleClick);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+        };
+    }, [file]);
+
     if (loading) {
         return <div className="bg-black min-h-screen text-white flex justify-center items-center">Loading...</div>;
     }
@@ -61,7 +76,7 @@ export default function FilePage() {
     return (
         <div className="bg-black min-h-screen">
             <FileNavbar name={file.name} fileId={id} />
-            <div className="max-w-3xl mx-auto px-4 py-10 mt-8 bg-neutral-900/80 rounded-2xl shadow-2xl border border-neutral-800">
+            <div className="max-w-3xl mx-auto px-4 py-10 mt-8 bg-neutral-900/80 rounded-2xl shadow-2xl border border-neutral-800 notebook-container">
                 {file.content.map((cell, index) => (
                     <Cell
                         key={index}
