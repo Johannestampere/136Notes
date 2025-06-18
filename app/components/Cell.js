@@ -5,7 +5,7 @@ import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Vector2D from "@/app/components/2d/Vector2D";
 import VectorSum from "@/app/components/2d/VectorSum2D";
 import Projection2D from "@/app/components/2d/Projection2D";
-import Vector3D from "@/app/components/3d/Vector3d.js";
+import Vector3D from "@/app/components/3d/Vector3D";
 import Sum3D from "./3d/Sum3d";
 
 export default function Cell({ cell, isEditing, setEditingCellId, refreshFileData, selectedCellId, setSelectedCellId }) {
@@ -148,14 +148,14 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
     }, [objectType3D, cell._id])
 
     return (
-        <div className={`mb-4 ${selectedCellId === cell._id ? "bg-gray-800" : ""}`} onClick={() => setSelectedCellId(cell._id)}>
+        <div className={`mb-4 transition-all ${selectedCellId === cell._id ? "bg-neutral-900 border border-neutral-700 shadow-2xl scale-[1.01]" : "bg-black border border-neutral-800 shadow-lg"} rounded-2xl p-4`} onClick={() => setSelectedCellId(cell._id)}>
             {isEditing ? (
                 <div className="flex items-center space-x-2">
                     <textarea
                         ref={textareaRef}
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className="p-2 bg-gray-700 text-white rounded flex-grow text-base resize-none overflow-hidden"
+                        className="p-3 bg-neutral-800 text-white rounded-2xl flex-grow text-base resize-none overflow-hidden border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white transition"
                         placeholder={`Enter ${cell.type}...`}
                         rows={1}
                     />
@@ -163,7 +163,7 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
                         <select
                             value={objectType}
                             onChange={(e) => setObjectType(e.target.value)}
-                            className="p-2 bg-gray-700 text-white rounded"
+                            className="p-3 bg-neutral-800 text-white rounded-2xl border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white transition"
                         >
                             <option value="" disabled>Select plot type</option>
                             <option value="vector">Vector</option>
@@ -175,7 +175,7 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
                         <select
                             value={objectType3D}
                             onChange={(e) => setObjectType3D(e.target.value)}
-                            className="p-2 bg-gray-700 text-white rounded"
+                            className="p-3 bg-neutral-800 text-white rounded-2xl border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white transition"
                         >
                             <option value="" disabled>Select plot type</option>
                             <option value="vector">Vector</option>
@@ -184,13 +184,13 @@ export default function Cell({ cell, isEditing, setEditingCellId, refreshFileDat
                     )}
                     <button
                         onClick={saveCell}
-                        className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        className="p-3 bg-white text-black rounded-2xl border border-neutral-700 hover:bg-neutral-200 transition-colors shadow transform transition-transform duration-150 hover:scale-105 hover:shadow-2xl font-semibold"
                     >
                         Save
                     </button>
                     <button
                         onClick={deleteCell}
-                        className="p-2 bg-red-600 text-white rounded hover:bg-red-700"
+                        className="p-3 bg-black text-white rounded-2xl border border-neutral-700 hover:bg-neutral-800 transition-colors shadow transform transition-transform duration-150 hover:scale-105 hover:shadow-2xl font-semibold"
                     >
                         Delete
                     </button>

@@ -51,17 +51,17 @@ export default function FilePage() {
     }, []);
 
     if (loading) {
-        return <div className="bg-gray-900 min-h-screen">LOADING ANIMATION HERE</div>;
+        return <div className="bg-black min-h-screen text-white flex justify-center items-center">Loading...</div>;
     }
 
     if (!file) {
-        return <div className="bg-gray-900 min-h-screen text-white flex justify-center items-center">File not found</div>;
+        return <div className="bg-black min-h-screen text-white flex justify-center items-center">File not found</div>;
     }
 
     return (
-        <div className="bg-gray-900 min-h-screen">
+        <div className="bg-black min-h-screen">
             <FileNavbar name={file.name} fileId={id} />
-            <div className="container mx-auto px-4 py-6">
+            <div className="max-w-3xl mx-auto px-4 py-10 mt-8 bg-neutral-900/80 rounded-2xl shadow-2xl border border-neutral-800">
                 {file.content.map((cell, index) => (
                     <Cell
                         key={index}

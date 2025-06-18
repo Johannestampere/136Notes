@@ -32,20 +32,20 @@ export default function Plus({ fileId, refreshFileData, setEditingCellId }) {
 
     return (
         <div 
-            className="relative w-full h-16 bg-green-500 hover:bg-green-600 transition-colors duration-300"
+            className="relative w-full h-16 bg-white hover:bg-neutral-200 transition-colors duration-300 rounded-2xl shadow-lg mt-4"
             onMouseEnter={() => setShowChoices(true)}
             onMouseLeave={() => setShowChoices(false)}
         >
-            <button className="w-full h-full text-3xl font-bold text-white">
+            <button className="w-full h-full text-3xl font-bold text-black rounded-2xl transition-transform duration-150 hover:scale-105 hover:shadow-2xl">
                 +
             </button>
             
             {showChoices && (
-                <div className="absolute inset-0 bg-gray-800 bg-opacity-90 flex items-center justify-between px-2">
+                <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-between px-2 rounded-2xl">
                     {types.map((type) => (
                         <button
                             key={type}
-                            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-1 transition-colors duration-300 flex-grow mx-0.5 text-sm"
+                            className="bg-neutral-800 hover:bg-neutral-700 text-white py-2 px-3 transition-colors duration-300 flex-grow mx-0.5 text-sm rounded-2xl shadow border border-neutral-700 font-semibold hover:scale-105 hover:shadow-2xl transform"
                             onClick={() => handleChoiceClick(type)}
                         >
                             {type.toUpperCase()}

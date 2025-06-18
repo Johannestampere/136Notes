@@ -50,9 +50,9 @@ export default function Navbar({ refreshFiles }) {
     };
 
     return (
-        <div className="w-64 h-screen bg-gray-800 p-5 flex flex-col items-center shadow-lg">
+        <div className="w-64 h-screen bg-neutral-900 border-r border-neutral-800 p-6 flex flex-col items-center shadow-2xl rounded-r-2xl">
             <div className="mb-8 text-center">
-                <Link href="/dashboard" className="text-green-400 text-2xl font-bold no-underline">
+                <Link href="/dashboard" className="text-white text-2xl font-bold no-underline tracking-tight">
                     136Notes
                 </Link>
             </div>
@@ -63,25 +63,25 @@ export default function Navbar({ refreshFiles }) {
                     value={fileName} 
                     onChange={(e) => setFileName(e.target.value)} 
                     placeholder="New file name"
-                    className="w-full p-3 rounded border-none outline-none bg-gray-700 text-green-400 text-center text-lg mb-4"
+                    className="w-full p-3 rounded-2xl border border-neutral-700 outline-none bg-black text-white text-center text-lg mb-4 shadow"
                 />
                 <button 
                     onClick={handleCreateFile} 
-                    className="w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors text-3xl font-bold flex items-center justify-center"
+                    className="w-16 h-16 bg-white text-black rounded-full hover:bg-neutral-200 transition-colors text-3xl font-bold flex items-center justify-center shadow-lg border border-neutral-700 transform transition-transform duration-150 hover:scale-110 hover:shadow-2xl"
                 >
                     +
                 </button>
             </div>
 
             <div className="w-full mt-auto">
-                <div className="text-green-400 text-lg p-2 rounded hover:bg-gray-700 transition-colors cursor-pointer text-center mb-4">
+                <div className="text-white text-lg p-2 rounded-2xl hover:bg-neutral-800 transition-colors cursor-pointer text-center mb-4">
                     Recents
                 </div>
 
                 {session && (
                     <button 
                         onClick={handleSignOut} 
-                        className="w-full p-2 bg-green-800 text-green-400 rounded hover:bg-green-900 transition-colors"
+                        className="w-full p-2 bg-black text-white rounded-2xl border border-neutral-700 hover:bg-neutral-800 transition-colors shadow transform transition-transform duration-150 hover:scale-105 hover:shadow-2xl"
                     >
                         Sign Out
                     </button>
